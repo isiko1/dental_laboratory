@@ -1,19 +1,17 @@
-<html>
-<head>
-    
-    <title>Patients</title>
-</head>
-<body>
-    {% for patient in patients %}
-       {{patient.job_name}}
-       {{patient.patient_name}}
-       {{patient.patient_dob}}
-       {{patient.gender}}
-       {{patient.private}}
-       {{patient.nhs}}
-       {{patient.due_date}}
-       {{patient.is_urgent}}
+{% extends 'base.html' %}
+{% block content %}
 
-    {% endfor %}
-</body>
-</html>
+<ul class="collapsible" data-collapsible="accordian">
+{% for patient in patients %}
+    <li>
+      <div class="collapsible-header"><i class="material-icons">expand_more</i>{{patient.patient_name}} - {{patient.patient_dob}}
+      </div>
+      <div class="collapsible-body">
+      <span>{{patient.due_date}}</span>
+      </div>
+    </li>
+{% endfor %}
+  </ul>
+  
+{% endblock %}
+
