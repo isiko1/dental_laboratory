@@ -22,7 +22,14 @@ def get_patients():
 
 @app.route('/add_patient')
 def add_patient():
-    return render_template('addpatient.html')
+    return render_template('addpatient.html', jobs=mongo.db.jobs.find())
+
+
+@app.route('/insert_patient', methods=['POST'])
+def insert_patient():
+    patients = mongo.db.patients
+    patients.insert_one(request.form.to_dic())
+    return redirect(url_for('get_patients'))
 
 
 if __name__ == '__main__':
