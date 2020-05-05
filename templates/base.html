@@ -1,34 +1,43 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
-
-<body>
-	{% block content %}
-
-	{% endblock %}
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function(){
-    $('.collapsible').collapsible();
-    $('select').formSelect();
-    $('.datepicker').datepicker();
-    $('input.autocomplete').autocomplete({
-      data: {
-        "Apple": null,
-        "Microsoft": null,
-        "Google": 'https://placehold.it/250x250'
-      },
-    });
-  });
-  function (a, b, inputString) {
-    return a.indexOf(inputString) - b.indexOf(inputString);
-  }
-	</script>
-</body>
-
+  <head>
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='css/style.css')}}"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='images/bupa.jpg')}}"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    {% block content %} {% endblock %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script type="text/javascript">
+      		$(document).ready(function(){
+          $('.collapsible').collapsible();
+          $('select').material_select();
+                         });
+        $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 100, // Creates a dropdown of 80 years to control year,
+            today: 'Today',
+            clear: 'Clear',
+            close: 'Ok',
+            closeOnSelect: false // Close upon selecting a date,
+        });
+        
+    </script>
+  </body>
 </html>
