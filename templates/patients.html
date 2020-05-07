@@ -1,17 +1,28 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
+<h3>Patient</h3>
 <ul class="collapsible" data-collapsible="accordian">
-{% for patient in patients %}
-    <li>
-      <div class="collapsible-header"><i class="material-icons">expand_more</i>{{patient.patient_name}} - {{patient.patient_dob}}
+  {% for patient in patients %}
+  <li>
+    <div class="collapsible-header">
+      <div class="col s3">
+        <i class="material-icons">expand_more</i>
+        <a href="{{url_for('edit_patient', patient_id=patient._id)}}" class="waves-effect waves-light btn btn_small red"
+          ><i class="material-icons left">create</i>Edit</a
+        >
+        <a class="waves-effect waves-light btn btn_small blue"
+          ><i class="material-icons right">check_box</i>Done</a
+        >
       </div>
-      <div class="collapsible-body">
-      <span>{{patient.due_date}} - {{patient.job_name}}</span>
+      <div class="col s9">
+        <strong class="pt-n">{{patient.patient_name}}</strong> - {{patient.patient_dob}}
       </div>
-    </li>
-{% endfor %}
-  </ul>
-  
-{% endblock %}
+    </div>
+    <div class="collapsible-body">
+      <span>{{patient.due_date}} - {{patient.job_name}} </span>
+    </div>
+  </li>
+  {% endfor %}
+</ul>
 
+{% endblock %}
