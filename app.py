@@ -35,7 +35,7 @@ def insert_patient():
 @app.route('/edit_patient/<patient_id>')
 def edit_patient(patient_id):
     the_patient = mongo.db.patients.find_one({"_id": ObjectId(patient_id)})
-    all_jobs = mongo.db.jobs.find(),
+    all_jobs = mongo.db.jobs.find()
     all_type = mongo.db.type.find()
     return render_template("editpatient.html", patient=the_patient,
                            jobs=all_jobs, type=all_type)
