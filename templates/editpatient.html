@@ -2,7 +2,7 @@
 
 <h3>Edit Patient</h3>
 <div class="row">
-  <form action="{{url_for('insert_patient')}}" method="POST" class="col s12">
+  <form action="{{url_for('update_patient', patient_id=patient._id)}}" method="POST" class="col s12">
     <div class="row">
       <div class="input-field col s12">
         <i class="material-icons prefix">person</i>
@@ -11,6 +11,7 @@
           name="patient_name"
           type="text"
           class="validate"
+          value="{{patient.patient_name}}"
         />
         <label for="icon_prefix">Full Name</label>
       </div>
@@ -18,54 +19,85 @@
     <div class="row">
       <div class="input-field col s12">
         <i class="material-icons prefix">cake</i>
-        <input id="patient_dob" name="patient_dob" type="text" class="datepicker" />
+        <input
+          id="patient_dob"
+          name="patient_dob"
+          type="text"
+          class="datepicker"
+          value="{{patient.patient_dob}}"
+        />
         <label for="icon_prefix">Date of Birth</label>
       </div>
     </div>
     <div class="row">
       <div class="input-field col s12">
         <i class="material-icons prefix">wc</i>
-         <input type="text" id="gender" name="gender" />
+        <input
+          type="text"
+          id="gender"
+          name="gender"
+          value="{{patient.gender}}"
+        />
         <label>Gender</label>
       </div>
     </div>
     <div class="row">
       <div class="input-field col s12">
         <i class="material-icons prefix">today</i>
-        <input id="due_date" name="due_date" type="text" class="datepicker" />
+        <input
+          id="due_date"
+          name="due_date"
+          type="text"
+          class="datepicker"
+          value="{{patient.due_date}}"
+        />
         <label for="icon_prefix">Due Date</label>
       </div>
     </div>
     <div class="row">
-    <div class="input-field col s12">
-       <select class="icons">
-      <option value="" disabled selected>Patient Type</option>
-      <option id="private" name="private" data-icon="{{url_for('static', filename='images/bupa.jpg')}}" type="checkbox">Private</option>
-      <option id="nhs" name="nhs" data-icon="{{url_for('static', filename='images/nhs-logo.png')}}" type="checkbox">NHS</option>
-         </select>
-    <label>Patient Type</label>
-     </div>
+      <div class="input-field col s12">
+        <select class="icons">
+          <option value="type.type_patient" disabled selected>Patient Type</option>
+           <option
+            id="type_patient"
+            name="type_patient"
+            data-icon="{{url_for('static', filename='images/bupa.jpg')}}"
+            value="{{type.type_patient}}"
+         >Private</option
+          >
+          <option
+            id="type_patient"
+            name="type_patient"
+            data-icon="{{url_for('static', filename='images/nhs-logo.png')}}"
+            value="{{type.type_patient}}"
+         >NHS</option
+         >
+        </select>
+        <label>Patient Type</label>
+      </div>
     </div>
     <div class="row">
-                <div class="input-field col s12">
-                    <i class="material-icons prefix">poll</i>
-                    <select id="jobs" name="job_name">
-                  <option value="" disabled selected>Choose Job</option>
-                  {% for job in jobs %}
-                  {% if job.job_name == job.job_name %}
-                      <option value="{{job.job_name}}" selected >{{job.job_name}}</option>
-                      {% else %}
-                      <option value="{{job.job_name}}">{{job.job_name}}</option>
-                      {% endif %}
-                  {% endfor %}
-                </select>
-                    <label>Job</label>
-                </div>
-            </div>
-       <div class="row">
+      <div class="input-field col s12">
+        <i class="material-icons prefix">poll</i>
+        <select id="jobs" name="job_name">
+          <option value="" disabled selected>Choose Job</option>
+          {% for job in jobs %} {% if job.job_name == job.job_name %}
+          <option value="{{job.job_name}}" selected>{{job.job_name}}</option>
+          {% else %}
+          <option value="{{job.job_name}}">{{job.job_name}}</option>
+          {% endif %} {% endfor %}
+        </select>
+        <label>Job</label>
+      </div>
+    </div>
+    <div class="row">
       <div class="switch">
         <label>
+          {% if patient.is_urgent %}
+          <input id="is_urgent" name="is_urgent" type="checkbox" checked />
+          {% else %}
           <input id="is_urgent" name="is_urgent" type="checkbox" />
+          {% endif %}
           <span class="lever"></span>
           Is urgent
         </label>
@@ -73,7 +105,7 @@
     </div>
     <div class="row">
       <button class="btn waves-effect waves-light" type="submit" name="action">
-        Add Patient
+        Edit Patient
         <i class="material-icons right">playlist_add</i>
       </button>
     </div>

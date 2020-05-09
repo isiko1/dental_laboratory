@@ -40,6 +40,27 @@ def edit_patient(patient_id):
     return render_template("editpatient.html", patient=the_patient,
                            jobs=all_jobs, type=all_type)
 
+
+@app.route('/update_patient/<patient_id>', methods=['POST'])
+def update_patient(patient_id):
+    patients = mongo.db.patients
+    patients.update({'_id': ObjectId(patient_id)},
+                    {'patient_name': request.form.get('patient_name'),
+                    'patient_dob': request.form.get('patient_dob'),
+                     'gender': request.form.get('gender'),
+                     'type_patient': request.form.get('type_patient'),
+                     'due_date': request.form.get('due_date'),
+                     'job_name': request.form.get('job_name'),
+                     'is_urgent': request.form.get('is_urgent')})
+    return redirect(url_for('get_patients'))
+
+
+@app.route('/delete_patient/<patient_id>')
+def delete_patient(patient_id):
+    mongo.db.patients.remove({'_id': ObjectId(patient_id)})
+    return redirect(url_for('get_patients'))
+
+
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),

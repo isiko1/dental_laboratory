@@ -38,12 +38,14 @@
     </div>
     <div class="row">
     <div class="input-field col s12">
-       <select class="icons">
+       <select id="type" name="type_patient" class="icons">
       <option value="" disabled selected>Patient Type</option>
-      <option id="private" name="private" data-icon="{{url_for('static', filename='images/bupa.jpg')}}" type="checkbox">Private</option>
-      <option id="nhs" name="nhs" data-icon="{{url_for('static', filename='images/nhs-logo.png')}}" type="checkbox">NHS</option>
+         <option value="{{type.type_patient}}" data-icon="{{url_for('static', filename='images/bupa.jpg')}}" selected>{{type.type_patient}}</option>
+      <option value="{{type.type_patient}}"  data-icon="{{url_for('static', filename='images/nhs-logo.png')}}">{{type.type_patient}}</option>
+         <option value="{{type.type_patient}}">{{type.type_patient}}</option>
+         
          </select>
-    <label>Patient Type</label>
+             <label>Patient Type</label>
      </div>
     </div>
     <div class="row">
