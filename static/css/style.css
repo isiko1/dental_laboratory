@@ -4,13 +4,22 @@ body {
     background-position: center;
   
 }
+
+/*---------------Template Style----------------------------------*/
+
 h1,h2,h3,h4,h5,h6{
     color:blueviolet;
       }
 .container{
-    background-color: #ffff;
+   background-color: lightgoldenrodyellow;
 }
-/* -------------button style--------------*/ 
+.pat{
+    position: relative;
+}
+
+
+/* ---------------button style------------------------------------*/ 
+
 .btn_small{
     height: 24px;
     margin: 5px 11px;

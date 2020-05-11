@@ -13,11 +13,16 @@ app.config['MONGO_URI'] = os.environ.get('MONGO_URI')
 
 mongo = PyMongo(app)
 
+"""-----------------------------Read----------------------------------"""
+
 
 @app.route('/')
 @app.route('/get_patients')
 def get_patients():
     return render_template('patients.html', patients=mongo.db.patients.find())
+
+
+"""-----------------------------Create--------------------------------"""
 
 
 @app.route('/add_patient')
@@ -30,6 +35,9 @@ def insert_patient():
     patients = mongo.db.patients
     patients.insert_one(request.form.to_dict())
     return redirect(url_for('get_patients'))
+
+
+"""-----------------------------Update---------------------------------"""
 
 
 @app.route('/edit_patient/<patient_id>')
@@ -55,10 +63,26 @@ def update_patient(patient_id):
     return redirect(url_for('get_patients'))
 
 
+"""-------------------------------Delete---------------------------------"""
+
+
 @app.route('/delete_patient/<patient_id>')
 def delete_patient(patient_id):
     mongo.db.patients.remove({'_id': ObjectId(patient_id)})
     return redirect(url_for('get_patients'))
+
+
+"""-------------------------------Read-----------------------------------"""
+
+
+@app.route('/get_jobs')
+def get_jobs():
+    return render_template('jobs.html', jobs=mongo.db.jobs.find())
+
+
+@app.route('/get_type')
+def get_type():
+    return render_template('type.html', type=mongo.db.type.find())
 
 
 if __name__ == '__main__':
