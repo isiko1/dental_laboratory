@@ -1,10 +1,15 @@
 body {
-    background-image: url(images/den.jpg);   
+    background-image: url(../images/imp.jpg);
+    background-attachment: fixed;
+    background-position: center;
+  
 }
 h1,h2,h3,h4,h5,h6{
-    color: blue;
+    color:blueviolet;
       }
-
+.container{
+    background-color: #ffff;
+}
 /* -------------button style--------------*/ 
 .btn_small{
     height: 24px;
