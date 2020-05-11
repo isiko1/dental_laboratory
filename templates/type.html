@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% block content %}
+
+<h3 class="pat">Type</h3>
+
+  <ul class="collapsible" data-collapsible="accordian">
+    {% for type in type %}
+    <li>
+      <div class="collapsible-header">
+        <a href="" class="waves-effect waves-light btn btn_small red"
+          ><i class="material-icons left">create</i>Edit</a
+        >
+        <a href="" class="waves-effect waves-light btn btn_small blue"
+          ><i class="material-icons right">check_box</i>Del</a
+        >
+         <strong class="pt-n">{{type.type_patient}}</strong>
+        </div>
+         </li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}
