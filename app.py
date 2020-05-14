@@ -1,22 +1,37 @@
 import os
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, request, url_for, flash
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+from forms import LoginForm
 from os import path
 if path.exists('env.py'):
     import env
+
 
 app = Flask(__name__)
 
 app.config['MONGO_DBNAME'] = "dental_laboratory"
 app.config['MONGO_URI'] = os.environ.get('MONGO_URI')
-
+app.config['SECRET_KEY'] = 'MONGO_URI'
 mongo = PyMongo(app)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        if form.confirm_password.data == form.password.data:
+            flash('Logged in as {}!'.format(form.username.data), 'success')
+            return redirect(url_for('get_patients'))
+        else:
+            flash('Login Unsuccessful. Please check username and password',
+                  'danger')
+    return render_template('login.html', title='Sign In', form=form)
+
 
 """-----------------------------Read----------------------------------"""
 
 
-@app.route('/')
 @app.route('/get_patients')
 def get_patients():
     return render_template('patients.html', patients=mongo.db.patients.find())
@@ -80,9 +95,43 @@ def get_jobs():
     return render_template('jobs.html', jobs=mongo.db.jobs.find())
 
 
+"""------------------------------Update----------------------------------"""
+
+
+@app.route('/edit_job/<job_id>')
+def edit_job(job_id):
+    return render_template('editjob.html',
+                           job=mongo.db.jobs.find_one(
+                            {'_id': ObjectId(job_id)}))
+
+
+@app.route('/update_job/<job_id>', methods=['POST', 'GET'])
+def update_job(job_id):
+    mongo.db.jobs.update(
+        {'_id': ObjectId(job_id)},
+        {'job_name': request.form.get('job_name')})
+    return redirect(url_for('get_jobs'))
+
+
+@app.route('/')
 @app.route('/get_type')
 def get_type():
     return render_template('type.html', type=mongo.db.type.find())
+
+
+@app.route('/edit_type/<type_id>')
+def edit_type(type_id):
+    return render_template('edittype.html',
+                           type=mongo.db.type.find_one(
+                            {'_id': ObjectId(type_id)}))
+
+
+@app.route('/update_type/<type_id>', methods=['POST', 'GET'])
+def update_type(type_id):
+    mongo.db.type.update(
+        {'_id': ObjectId(type_id)},
+        {'type_patient': request.form.get('type_patient')})
+    return redirect(url_for('get_type'))
 
 
 if __name__ == '__main__':
