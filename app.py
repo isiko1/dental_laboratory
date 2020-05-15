@@ -16,6 +16,9 @@ app.config['SECRET_KEY'] = 'MONGO_URI'
 mongo = PyMongo(app)
 
 
+"""---------------------------------------Login----------------------------"""
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -113,10 +116,33 @@ def update_job(job_id):
     return redirect(url_for('get_jobs'))
 
 
-@app.route('/')
+@app.route('/delete_job/<job_id>')
+def delete_job(job_id):
+    mongo.db.jobs.remove({'_id': ObjectId(job_id)})
+    return redirect(url_for('get_jobs'))
+
+
+@app.route('/insert_job', methods=['POST'])
+def insert_job():
+    job_doc = {'job_name': request.form.get('job_name')}
+    mongo.db.jobs.insert_one(job_doc)
+    return redirect(url_for('get_jobs'))
+
+
+"""-------------------------------Create--------------------------------"""
+
+
+@app.route('/add_job')
+def add_job():
+    return render_template('addjob.html')
+
+
 @app.route('/get_type')
 def get_type():
     return render_template('type.html', type=mongo.db.type.find())
+
+
+"""------------------------------Update----------------------------------"""
 
 
 @app.route('/edit_type/<type_id>')
@@ -126,13 +152,40 @@ def edit_type(type_id):
                             {'_id': ObjectId(type_id)}))
 
 
-@app.route('/update_type/<type_id>', methods=['POST', 'GET'])
+@app.route('/update_type/<type_id>', methods=['POST'])
 def update_type(type_id):
     mongo.db.type.update(
         {'_id': ObjectId(type_id)},
         {'type_patient': request.form.get('type_patient')})
     return redirect(url_for('get_type'))
 
+
+"""------------------------------Delete----------------------------------"""
+
+
+@app.route('/delete_type/<type_id>')
+def delete_type(type_id):
+    mongo.db.type.remove({'_id': ObjectId(type_id)})
+    return redirect(url_for('get_type'))
+
+
+"""------------------------------Create----------------------------------"""
+
+
+@app.route('/insert_type', methods=['POST'])
+def insert_type():
+    type_doc = {'type_patient': request.form.get('type_patient')}
+    mongo.db.type.insert_one(type_doc)
+    return redirect(url_for('get_type'))
+
+
+@app.route('/')
+@app.route('/add_type')
+def add_type():
+    return render_template('addtype.html')
+
+
+"""---------------------------------Application---------------------"""
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
