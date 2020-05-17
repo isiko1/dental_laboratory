@@ -35,7 +35,7 @@ At each stage of a new function and template the code was tested running through
 Various background features and colours were tested as well as styling using the browser and the inspect window. On right clicking and selecting inspect, one can choose the various platform views i.e iphone 6, Ipad or Desktop etc.
 Responsive testing for mobile view was carried out using the inspect window.
 # Deployment
-There a live version deployed in Heroku.
+There a live version deployed in Heroku. https://git.heroku.com/dental-laboratory.git
 # Credits
 Code used and modified from:
 i.	Python Flask Tutorial - https://www.youtube.com/watch?v=UIJKdCIEXUQ
