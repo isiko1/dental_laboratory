@@ -7,14 +7,20 @@ body {
 
 /*---------------Template Style----------------------------------*/
 
+a {
+    color: #fafafa;
+}
+nav .brand-logo {
+        margin-left: 30px;
+}
 h1,h2,h3,h4,h5,h6{
     color:blueviolet;
       }
-.container{
-   background-color: lightgoldenrodyellow;
+.container {
+       background-color: lightgoldenrodyellow;
 }
 .pat{
-    position: relative;
+    position: static;
 }
 
 
@@ -26,4 +32,6 @@ h1,h2,h3,h4,h5,h6{
     padding: 0 0.5em;
     } 
 
-    
+button{
+        margin: 26px;
+}

@@ -16,6 +16,27 @@
     />
   </head>
   <body>
+  <nav>
+    <div class="nav-wrapper">
+      <a href="{{url_for('get_patients')}}" class="brand-logo">Dental Laboratory</a>
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="{{url_for('get_patients')}}">Home</a></li>
+        <li><a href="{{url_for('add_patient')}}">New Patient</a></li>
+        <li><a href="{{url_for('get_jobs')}}">Manage Jobs</a></li>
+        <li><a href="{{url_for('get_type')}}">Manage Type</a></li>
+        <li><a href="{{url_for('login')}}">Sign In</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <ul class="sidenav" id="mobile-demo">
+    <li><a href="{{url_for('get_patients')}}">Home</a></li>
+        <li><a href="{{url_for('add_patient')}}">New Patient</a></li>
+        <li><a href="{{url_for('get_jobs')}}">Manage Jobs</a></li>
+        <li><a href="{{url_for('get_type')}}">Manage Type</a></li>
+        <li><a href="{{url_for('login')}}">Sign In</a></li>
+  </ul>
     <div class="container">
       {% with messages = get_flashed_messages(with_categories=true) %} {% if
       messages %} {% for category, message in messages %}
@@ -30,7 +51,9 @@
       $(document).ready(function () {
         $(".collapsible").collapsible();
         $("select").material_select();
+        $(".sidenav").sidenav();
       });
+
 
       /* ----Code from mini project------*/
 

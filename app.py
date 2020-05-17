@@ -19,6 +19,7 @@ mongo = PyMongo(app)
 """---------------------------------------Login----------------------------"""
 
 
+@app.route('/')
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -32,20 +33,23 @@ def login():
     return render_template('login.html', title='Sign In', form=form)
 
 
-"""-----------------------------Read----------------------------------"""
+"""-----------------------------Read-------------------------------------"""
 
 
 @app.route('/get_patients')
 def get_patients():
-    return render_template('patients.html', patients=mongo.db.patients.find())
+    return render_template('patients.html', patients=mongo.db.patients.find(),
+                           type=mongo.db.patients.find())
 
 
-"""-----------------------------Create--------------------------------"""
+
+"""-----------------------------Create-------------------------------------"""
 
 
 @app.route('/add_patient')
 def add_patient():
-    return render_template('addpatient.html', jobs=mongo.db.jobs.find())
+    return render_template('addpatient.html', jobs=mongo.db.jobs.find(),
+                           type=mongo.db.type.find())
 
 
 @app.route('/insert_patient', methods=['POST'])
@@ -108,7 +112,7 @@ def edit_job(job_id):
                             {'_id': ObjectId(job_id)}))
 
 
-@app.route('/update_job/<job_id>', methods=['POST', 'GET'])
+@app.route('/update_job/<job_id>', methods=['POST'])
 def update_job(job_id):
     mongo.db.jobs.update(
         {'_id': ObjectId(job_id)},
@@ -116,10 +120,16 @@ def update_job(job_id):
     return redirect(url_for('get_jobs'))
 
 
+"""-----------------------------Delete---------------------------------"""
+
+
 @app.route('/delete_job/<job_id>')
 def delete_job(job_id):
     mongo.db.jobs.remove({'_id': ObjectId(job_id)})
     return redirect(url_for('get_jobs'))
+
+
+"""-----------------------------Update---------------------------------"""
 
 
 @app.route('/insert_job', methods=['POST'])
@@ -135,6 +145,9 @@ def insert_job():
 @app.route('/add_job')
 def add_job():
     return render_template('addjob.html')
+
+
+"""--------------------------------Read---------------------------------"""
 
 
 @app.route('/get_type')
@@ -154,9 +167,8 @@ def edit_type(type_id):
 
 @app.route('/update_type/<type_id>', methods=['POST'])
 def update_type(type_id):
-    mongo.db.type.update(
-        {'_id': ObjectId(type_id)},
-        {'type_patient': request.form.get('type_patient')})
+    mongo.db.type.update({'_id': ObjectId(type_id)},
+                         {'type_patient': request.form.get('type_patient')})
     return redirect(url_for('get_type'))
 
 
@@ -179,13 +191,12 @@ def insert_type():
     return redirect(url_for('get_type'))
 
 
-@app.route('/')
 @app.route('/add_type')
 def add_type():
     return render_template('addtype.html')
 
 
-"""---------------------------------Application---------------------"""
+"""---------------------------------Application--------------------------"""
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
