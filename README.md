@@ -3,17 +3,17 @@ Inspired from my time working in the dental profession, I chose to produce a den
 # UX
 A recording system of work produced and despatched from a dental laboratory. The user logs on using a username and password to access the database. The sign in page has password authentication. Once logged in the user Is taken to home page which has a list of patients.
 # Features
-# Home
+Home
 The display format function buttons, patient name and date of birth
 Dropdown display is appointment date, (due date) for the appliance to be fitted and the name of the appliance.
 The appliances are requested from the dentist and on arrival of the request the patient is added to the database using the New patient tab. When the Job is returned and fitted on the appointment date then the patient is deleted when selecting the Done button. Any amendments can also be made by selecting the edit button.
-# Jobs
+Jobs
 The requested appliance is a job for the dental technician and on the new patient form, there is a dropdown list of various jobs that are ubiquitously requested. When designing the database allowance has been made for jobs that are not commonly requested and these can be added to the database using the add job function by selecting the Manage Jobs in the navbar.
-# Manage Jobs
+Manage Jobs
 The display format function buttons and name of the appliance and at the base of the form is the add job button.
-# Type
+Type
 In the dental profession there are patient types to determine the cost of treatment that can be afforded. The most common patient types are NHS or Private.  There is a limit charge which is set by the government that can be afforded to an NHS patient irrespective of the treatment supplied.  There are also no charges for certain treatment for children and under eighteens who are still in full time education.  Just as the requested jobs, an allowance has been made for any patient types that may have been overlooked in the design or that may appear later on and these can be added to the database using the add type function by selecting Manage Types in the navbar.
-# Manage Type
+Manage Type
 The display format function buttons and patient type and at the base of the form is the add type button.
 # Features Left to Implement
 The database has scope for a wide range of functionality firstly great potential as a cloud based b2b application linked directly to the dental practices.  Future additions:
