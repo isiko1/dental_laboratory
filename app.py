@@ -7,7 +7,6 @@ from os import path
 if path.exists('env.py'):
     import env
 
-
 app = Flask(__name__)
 
 app.config['MONGO_DBNAME'] = "dental_laboratory"
@@ -15,15 +14,12 @@ app.config['MONGO_URI'] = os.environ.get('MONGO_URI')
 app.config['SECRET_KEY'] = 'MONGO_URI'
 mongo = PyMongo(app)
 
-
 # ---------------------------------------Login----------------------------
 @app.route('/')
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-## TODO Future development is to add Registration form to allow encryption and storage of user database. 
-## Also addition of log out functionality.
         if form.confirm_password.data == form.password.data:
             flash('Logged in as {}!'.format(form.username.data), 'success')
             return redirect(url_for('get_patients'))
