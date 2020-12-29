@@ -2,6 +2,7 @@ $(document).ready(function(){
         $(".collapsible").collapsible();
         $("select").material_select();
         $(".sidenav").sidenav();
+         M.updateTextFields();
       });
       /* ----Code from mini project------*/
       $('.datepicker').pickadate({

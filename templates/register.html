@@ -1,10 +1,48 @@
 {% extends 'base.html' %} {% block content %}
-<h3>Register</h3>
+<h3 class="center-align">Register</h3>
 <div class="row">
-    <form class="col s12 m8 offset-m2">
-      <div class="card-panel teal">
-        <span class="white-text">Test</span>
+    <form class="col s12 m8 offset-m2" method="POST" action="{{url_for('register')}}">
+      <div class="card-panel">
+
+          <!----------------------------------------------------rname-------------------------------------------->
+       <div class="row">
+        <div class="input-field col s12">
+            <i class="material-icons prefix">person_add</i>
+          <input placeholder="Placeholder" id="username" name="username" type="text" class="validate">
+          <label for="username">Username</label>
+        </div>
+
+        <!----------------------------Password------------------------------------------------------------------->
+        <div class="row">
+        <div class="input-field col s12">
+            <i class="material-icons prefix">verified_user</i>
+          <input id="password" type="password" class="validate">
+          <label for="password">Password</label>
+        </div>
+      </div>      
+       <div class="row">
+        <div class="input-field col s12">
+            <i class="material-icons prefix">thumb_up</i>
+          <input id="confirm_password" type="password" class="validate">
+          <label for="password">Confirm Password</label>
+        </div>
       </div>
+
+       <!---------------------------------Email------------------------------------------------------------------->
+      <div class="row">
+        <div class="input-field col s12">
+            <i class="material-icons prefix">mail</i>
+          <input id="email" type="email" class="validate">
+          <label for="email">Email</label>
+        </div>
+      </div>
+      </div>
+
+       <!---------------------------------Submit------------------------------------------------------------------->
+      <div class="row">
+          <button type="submit" class="col s12 btn-large light-blue darken-4 text-shadow">Register<i class="material-icons right">send</i></button>
+      </div>
+    </div>
     </form>
   </div>
 {% endblock %}
