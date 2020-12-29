@@ -4,6 +4,8 @@ from flask import (Flask, render_template,
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from forms import LoginForm
+from werkzeug.security import (generate_password_hash,
+                               check_password_hash)
 from os import path
 if os.path.exists("env.py"):
     import env
@@ -28,6 +30,11 @@ def login():
             flash('Login Unsuccessful. Please check username and password',
                   'danger')
     return render_template('login.html', title='Sign In', form=form)
+
+# -----------------------------Register-------------------------------------
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    return render_template('register.html')
 
 # -----------------------------Read-------------------------------------
 @app.route('/get_patients')
