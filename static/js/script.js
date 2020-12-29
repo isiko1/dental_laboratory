@@ -1,7 +1,7 @@
 $(document).ready(function(){
-        $('.collapsible').collapsible();
-        $('select').material_select();
-        $('.sidenav').sidenav();
+        $(".collapsible").collapsible();
+        $("select").material_select();
+        $(".sidenav").sidenav({edge: "right"});
       });
       /* ----Code from mini project------*/
       $('.datepicker').pickadate({

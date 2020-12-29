@@ -2,12 +2,15 @@
 <html>
 
 <head>
-	<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css" />
+{% block styles %}
+{% endblock %}
+    <title>Dental Laboratory</title>
 </head>
-
 <body>
+<header>
 	<nav>
 		<div class="nav-wrapper">
 			<a href="{{url_for('get_patients')}}" class="brand-logo">Dental Laboratory</a>
@@ -20,14 +23,15 @@
 				<li><a href="{{url_for('login')}}">Sign In</a></li>
 			</ul>
 		</div>
-	</nav>
+    </nav>
 	<ul class="sidenav" id="mobile-demo">
 		<li><a href="{{url_for('get_patients')}}">Home</a></li>
 		<li><a href="{{url_for('add_patient')}}">New Patient</a></li>
 		<li><a href="{{url_for('get_jobs')}}">Manage Jobs</a></li>
 		<li><a href="{{url_for('get_type')}}">Manage Type</a></li>
 		<li><a href="{{url_for('login')}}">Sign In</a></li>
-	</ul>
+    </ul>
+    </header>
 	<div class="container">
 		{% with messages = get_flashed_messages(with_categories=true) %} {% if
       messages %} {% for category, message in messages %}
@@ -38,22 +42,11 @@
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function () {
-        $(".collapsible").collapsible();
-        $("select").material_select();
-        $(".sidenav").sidenav();
-      });
-      /* ----Code from mini project------*/
-      $(".datepicker").pickadate({
-        selectMonths: true, // Creates a dropdown to control month
-        selectYears: 100, // Creates a dropdown of 80 years to control year,
-        today: "Today",
-        clear: "Clear",
-        close: "Ok",
-        closeOnSelect: false, // Close upon selecting a date,
-      });
-	</script>
+    <script src="{{url_for('static', filename='js/script.js')}}"></script>
+    {% block scripts %}
+
+    {% endblock %}
+
 </body>
 
 </html>

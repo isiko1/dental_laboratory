@@ -27,9 +27,10 @@ h1,h2,h3,h4,h5,h6{
 /* ---------------button style------------------------------------*/ 
 
 .btn_small{
-    height: 24px;
-    margin: 5px 11px;
-    padding: 0 0.5em;
+    height: 30px;
+    width: 100px;
+    margin: 3px 2px;
+    padding: inherit;
     } 
 
 button{
