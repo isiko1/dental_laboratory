@@ -35,7 +35,7 @@
 			<div class="input-field col s12">
 				<select id="type" name="type_patient">
                   <option value="" disabled selected>Patient Type</option>
-                  {% for t in type %}
+                  {% for t in types %}
                   {% if t.type_patient == t.type_patient %}
                       <option value="{{t.type_patient}}" selected >{{t.type_patient}}</option>
                       {% else %}
