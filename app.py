@@ -56,14 +56,12 @@ def register():
 # -----------------------------Read-------------------------------------
 @app.route('/get_patients')
 def get_patients():
-    return render_template('patients.html', patients=mongo.db.patients.find(),
-                           type=mongo.db.patients.find())
-
+    return render_template('patients.html', patients=mongo.db.patients.find())
 
 # -----------------------------Create-------------------------------------
 @app.route('/add_patient')
 def add_patient():
-    return render_template('addpatient.html', jobs=mongo.db.jobs.find(),
+    return render_template('addpatient.html', patients=mongo.db.jobs.find(),
                            type=mongo.db.type.find())
 
 
