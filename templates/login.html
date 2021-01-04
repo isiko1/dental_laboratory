@@ -3,7 +3,7 @@
 <h3>Sign In</h3>
 <div class="form group">
 
-	<form action="{{ url_for('login') }}" method="post" novalidate>
+	<form action="/login" method="POST" novalidate>
 		{{ form.hidden_tag() }}
 		<div>
 			{{ form.username.label (class="form-control-label") }}<br/>
@@ -47,9 +47,9 @@
 		<small class="text-muted ml-2">
     <a href="#">Forgot Password?</a>
     </small>
-    </form>
+	</form>
 </div>
 <div class="border-top pt-3">
-	<h6 class="ml-2"> Need an account?<a href="{{ url_for('register') }}" class="light-blue-text text-darken-4">Register Here</a><br>Or Contact your Administrator</h6>
+	<h6 class="ml-2"> Need an account? Contact your Administrator</h6>
 </div>
 {% endblock %}

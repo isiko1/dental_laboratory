@@ -1,12 +1,10 @@
 import os
-from flask import (Flask, render_template,
-                   redirect, request, session, url_for, flash)
+from flask import Flask, render_template, redirect, request, url_for, flash
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from forms import LoginForm
-from werkzeug.security import generate_password_hash, check_password_hash
 from os import path
-if os.path.exists("env.py"):
+if os.path.exists('env.py'):
     import env
 
 app = Flask(__name__)
@@ -30,53 +28,18 @@ def login():
                   'danger')
     return render_template('login.html', title='Sign In', form=form)
 
-# -----------------------------Register-------------------------------------
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    if request.method == "POST":
-        # check if username already exists in db
-        existing_user = mongo.db.users.find_one(
-            {"username": request.form.get("username").lower()}
-        )
-        if existing_user:
-            flash("Username already exists")
-            return redirect(url_for("register"))
-# ------------Dictionary----------------------------------------------------
-        register = {
-            "username": request.form.get("username").lower(),
-            "password": generate_password_hash(request.form.get("password")),
-            "email": request.form.get("email").lower()
-        }
-        mongo.db.users.insert_one(register)
-# put new user into session cookie
-        session["user"] = request.form.get("username").lower()
-        flash("Registration successful!")
-    return render_template('register.html')
-
 # -----------------------------Read-------------------------------------
 @app.route('/get_patients')
 def get_patients():
     return render_template('patients.html', patients=mongo.db.patients.find(),
-                           type=mongo.db.patients.find())
+                           type=mongo.db.type.find())
+
 
 # -----------------------------Create-------------------------------------
-@app.route('/add_patient', methods=["GET", "POST"])
+@app.route('/add_patient')
 def add_patient():
-    if request.method == "POST":
-        patient = {
-            'patient_name': request.form.get('patient_name'),
-            'patient_dob': request.form.get('patient_dob'),
-            'gender': request.form.get('gender'),
-            'type_patient': request.form.get('type_patient'),
-            'due_date': request.form.get('due_date'),
-            'job_name': request.form.get('job_name'),
-            'is_urgent': request.form.get('is_urgent')
-        }
-        mongo.db.patients.insert_one(patient)
-        flash("Task Successfully Added")
-        return redirect(url_for("get_patients"))
-    patients = mongo.db.patients.find().sort("patient_name", 1)
-    return render_template("addpatient.html", patients=patients)
+    return render_template('addpatient.html', jobs=mongo.db.jobs.find(),
+                           type=mongo.db.type.find())
 
 
 @app.route('/insert_patient', methods=['POST'])
@@ -122,7 +85,7 @@ def get_jobs():
     return render_template('jobs.html', jobs=mongo.db.jobs.find())
 
 
-# ------------------------------Update----------------------------------
+# ------------------------------Update----------------------------------"""
 @app.route('/edit_job/<job_id>')
 def edit_job(job_id):
     return render_template('editjob.html',
@@ -137,14 +100,14 @@ def update_job(job_id):
     return redirect(url_for('get_jobs'))
 
 
-# -----------------------------Delete---------------------------------
+# -----------------------------Delete---------------------------------"""
 @app.route('/delete_job/<job_id>')
 def delete_job(job_id):
     mongo.db.jobs.remove({'_id': ObjectId(job_id)})
     return redirect(url_for('get_jobs'))
 
 
-# -----------------------------Update---------------------------------
+# -----------------------------Update---------------------------------"""
 @app.route('/insert_job', methods=['POST'])
 def insert_job():
     job_doc = {'job_name': request.form.get('job_name')}
@@ -152,19 +115,19 @@ def insert_job():
     return redirect(url_for('get_jobs'))
 
 
-# -------------------------------Create--------------------------------
+# -------------------------------Create--------------------------------"""
 @app.route('/add_job')
 def add_job():
     return render_template('addjob.html')
 
 
-# --------------------------------Read---------------------------------
+# --------------------------------Read---------------------------------"""
 @app.route('/get_type')
 def get_type():
     return render_template('type.html', type=mongo.db.type.find())
 
 
-# ------------------------------Update----------------------------------
+# ------------------------------Update----------------------------------"""
 @app.route('/edit_type/<type_id>')
 def edit_type(type_id):
     return render_template('edittype.html',
@@ -179,14 +142,14 @@ def update_type(type_id):
     return redirect(url_for('get_type'))
 
 
-# ------------------------------Delete----------------------------------
+# ------------------------------Delete----------------------------------"""
 @app.route('/delete_type/<type_id>')
 def delete_type(type_id):
     mongo.db.type.remove({'_id': ObjectId(type_id)})
     return redirect(url_for('get_type'))
 
 
-# ------------------------------Create----------------------------------
+# ------------------------------Create----------------------------------"""
 @app.route('/insert_type', methods=['POST'])
 def insert_type():
     type_doc = {'type_patient': request.form.get('type_patient')}
@@ -199,7 +162,7 @@ def add_type():
     return render_template('addtype.html')
 
 
-# ---------------------------------Application--------------------------
+# ---------------------------------Application--------------------------"""
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
