@@ -41,7 +41,12 @@
       <div class="row">
           <button type="submit" class="col s12 btn-large light-blue darken-4 text-shadow">Register<i class="material-icons right">send</i></button>
       </div>
-    </div>
+      <div class="border-top pt-3">
+    <h6 class="ml-2 center-align"> Already Registered?
+            <a href="{{url_for('login')}}">Sign In Here</a>
+     </h6>
+       </div>
+    </div>    
     </form>
   </div>
 {% endblock %}
