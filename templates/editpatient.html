@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 
-<h3 class="pat">Edit Patient</h3>
+<h3 class="pat center-align">Edit Patient</h3>
 <div class="row">
 	<form action="{{url_for('update_patient', patient_id=patient._id)}}" method="POST" class="col s12">
 		<div class="row">

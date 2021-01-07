@@ -1,6 +1,6 @@
 import os
 from flask import (Flask, render_template,
-                  redirect, session, request, url_for, flash)
+                   redirect, session, request, url_for, flash)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from forms import LoginForm
@@ -30,12 +30,14 @@ def register():
         register = {
             "username": request.form.get("username").lower(),
             "password": generate_password_hash(request.form.get("password")),
+            "confirm_password": check_password_hash(
+                ("username"), request.form.get("password")),
             "email": request.form.get("email").lower()
         }
         mongo.db.users.insert_one(register)
 # put new user into session cookie
         session["user"] = request.form.get("username").lower()
-        flash("Registration successful!")
+        flash("Registration Successful!")
     return render_template('register.html')
 
 
@@ -107,7 +109,7 @@ def delete_patient(patient_id):
 # -------------------------------Read-----------------------------------
 @app.route('/get_jobs')
 def get_jobs():
-    return render_template('jobs.html', jobs=mongo.db.jobs.find())
+    return render_template('jobs.html', jobs=list(mongo.db.jobs.find()))
 
 
 # ------------------------------Update----------------------------------"""

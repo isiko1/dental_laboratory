@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 
-<h3 class="pat">Edit Job</h3>
+<h3 class="pat center-align">Edit Job</h3>
 <div class="row">
 	<form action="{{ url_for('update_job', job_id=job._id) }}" method="POST" class="col s12">
 		<div class="row">
