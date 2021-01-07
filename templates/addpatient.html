@@ -20,7 +20,7 @@
 		<div class="row">
 			<div class="input-field col s12">
 				<i class="material-icons prefix">wc</i>
-				<input type="text" id="gender" name="gender" />
+				<input type="text" id="gender" name="gender"/>
 				<label>Gender</label>
 			</div>
 		</div>
@@ -30,19 +30,18 @@
 				<input id="due_date" name="due_date" type="text" class="datepicker" />
 				<label for="due_date">Due Date</label>
 			</div>
-		</div>
-		<div class="row">
+        </div>
+        <div class="row">
 			<div class="input-field col s12">
+				<i class="material-icons prefix">poll</i>
 				<select id="type" name="type_patient">
-                  <option value="" disabled selected>Patient Type</option>
-                  {% for t in types %}
-                  {% if t.type_patient == t.type_patient %}
-                      <option value="{{t.type_patient}}" selected >{{t.type_patient}}</option>
-                      {% else %}
-                      <option value="{{t.type_patient}}">{{t.type_patient}}</option>
-                      {% endif %}
-                  {% endfor %}
-                </select>
+          <option value="" disabled selected>Patient Type</option>
+          {% for t in type %} {% if t.type_patient == t.type_patient %}
+          <option value="{{t.type_patient}}" selected>{{t.type_patient}}</option>
+          {% else %}
+          <option value="{{t.type_patient}}">{{t.type_patient}}</option>
+          {% endif %} {% endfor %}
+        </select>
 				<label>Patient Type</label>
 			</div>
 		</div>
@@ -51,13 +50,17 @@
 				<i class="material-icons prefix">poll</i>
 				<select id="jobs" name="job_name">
                   <option value="" disabled selected>Choose Job</option>
-                  {% for job in jobss %}
+                  <ul class="collapsible">
+                  {% for job in jobs %}
+                  <li>
                   {% if job.job_name == job.job_name %}
                       <option value="{{job.job_name}}" selected >{{job.job_name}}</option>
                       {% else %}
                       <option value="{{job.job_name}}">{{job.job_name}}</option>
                       {% endif %}
                   {% endfor %}
+                  </li>
+                  </ul>
                 </select>
 				<label>Job</label>
 			</div>

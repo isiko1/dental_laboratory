@@ -59,7 +59,7 @@ def login():
 @app.route('/get_patients')
 def get_patients():
     return render_template('patients.html', patients=mongo.db.patients.find(),
-                           type=mongo.db.type.find())
+                           type=list(mongo.db.type.find()))
 
 
 # -----------------------------Create-------------------------------------
