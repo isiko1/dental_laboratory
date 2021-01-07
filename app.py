@@ -15,6 +15,7 @@ app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
+
 # -----------------------------Register-------------------------------------
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -25,7 +26,7 @@ def register():
         )
         if existing_user:
             flash("Username already exists")
-            return redirect(url_for("register"))
+            return redirect(url_for("login"))
 # ------------Dictionary----------------------------------------------------
         register = {
             "username": request.form.get("username").lower(),
@@ -54,6 +55,14 @@ def login():
             flash('Login Unsuccessful. Please check username and password',
                   'danger')
     return render_template('login.html', title='Sign In', form=form)
+
+
+# -----------------------------Log out-------------------------------------
+@app.route("/logout")
+def logout():
+    flash("You have logged out successfully!")
+    return redirect(url_for('login'))
+
 
 # -----------------------------Read-------------------------------------
 @app.route('/get_patients')
