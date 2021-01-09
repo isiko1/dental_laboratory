@@ -118,10 +118,10 @@ def delete_patient(patient_id):
 # -------------------------------Read-----------------------------------
 @app.route('/get_jobs')
 def get_jobs():
-    return render_template('jobs.html', jobs=list(mongo.db.jobs.find()))
+    return render_template('jobs.html', jobs=mongo.db.jobs.find())
 
 
-# ------------------------------Update----------------------------------"""
+# ------------------------------Update----------------------------------
 @app.route('/edit_job/<job_id>')
 def edit_job(job_id):
     return render_template('editjob.html',
@@ -129,35 +129,35 @@ def edit_job(job_id):
                             {'_id': ObjectId(job_id)}))
 
 
-@app.route('/update_job/<job_id>', methods=['POST'])
+@app.route('/update_job/<job_id>', methods=["POST"])
 def update_job(job_id):
-    mongo.db.jobs.update_one({'_id': ObjectId(job_id)},
-                             {'job_name': request.form.get('job_name')})
+    mongo.db.jobs.update({'_id': ObjectId(job_id)},
+                         {'job_name': request.form.get('job_name')})
     return redirect(url_for('get_jobs'))
 
 
-# -----------------------------Delete---------------------------------"""
+# -----------------------------Delete---------------------------------
 @app.route('/delete_job/<job_id>')
 def delete_job(job_id):
     mongo.db.jobs.remove({'_id': ObjectId(job_id)})
     return redirect(url_for('get_jobs'))
 
 
-# -----------------------------Update---------------------------------"""
-@app.route('/insert_job', methods=['POST'])
+# -----------------------------Update---------------------------------
+@app.route('/insert_job', methods=["POST"])
 def insert_job():
     job_doc = {'job_name': request.form.get('job_name')}
     mongo.db.jobs.insert_one(job_doc)
     return redirect(url_for('get_jobs'))
 
 
-# -------------------------------Create--------------------------------"""
+# -------------------------------Create--------------------------------
 @app.route('/add_job')
 def add_job():
     return render_template('addjob.html')
 
 
-# --------------------------------Read---------------------------------"""
+# --------------------------------Read---------------------------------
 @app.route('/get_type')
 def get_type():
     return render_template('type.html', type=list(mongo.db.type.find()))
@@ -167,26 +167,26 @@ def get_type():
 @app.route('/edit_type/<type_id>')
 def edit_type(type_id):
     return render_template('edittype.html',
-                           type=mongo.db.type.find_one({'_id': ObjectId(type_id)}))
+                           type=mongo.db.type.find_one(
+                            {'_id': ObjectId(type_id)}))
 
 
-@app.route('/update_type/<type_id>')
+@app.route('/update_type/<type_id>', methods=["POST"])
 def update_type(type_id):
-    mongo.db.type.update_one({'_id': ObjectId(type_id)},
-                             {'type_patient':
-                              request.form.get('type_patient')})
+    mongo.db.type.update({'_id': ObjectId(type_id)},
+                         {'type_patient': request.form.get('type_patient')})
     return redirect(url_for('get_type'))
 
 
-# ------------------------------Delete----------------------------------"""
+# ------------------------------Delete----------------------------------
 @app.route('/delete_type/<type_id>')
 def delete_type(type_id):
     mongo.db.type.remove({'_id': ObjectId(type_id)})
     return redirect(url_for('get_type'))
 
 
-# ------------------------------Create----------------------------------"""
-@app.route('/insert_type', methods=['POST'])
+# ------------------------------Create----------------------------------
+@app.route('/insert_type', methods=["POST"])
 def insert_type():
     type_doc = {'type_patient': request.form.get('type_patient')}
     mongo.db.type.insert_one(type_doc)
