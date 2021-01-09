@@ -22,17 +22,19 @@ h1,h2,h3,h4,h5,h6{
 .pat{
     position: static;
 }
-
+.ptn{
+    text-justify: auto;
+}
 
 /* ---------------button style------------------------------------*/ 
 
-.btn_small{
+.btn_large{
     height: 30px;
     width: 100px;
     margin: 3px 2px;
-    padding: inherit;
+    padding: 5px;
     } 
 
 button{
-        margin: 26px;
+        margin: 10px;
 }

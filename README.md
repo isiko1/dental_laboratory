@@ -1,9 +1,23 @@
 # Dental Laboratory – Database
-Inspired from my time working in the dental profession, I chose to produce a dental laboratory database that records dental appliances produced in the dental laboratory.  
+Inspired from my time working in the dental profession when dental laboratory work was recorded in a paper book. I doubt this 
+practice is still in use with the technology available today. To assist companies that may have not moved form the practice of paper records in chosng an IT system for their needs, I have chosen to produce a dental laboratory database for my project.  
 # UX
-A recording system of work produced and despatched from a dental laboratory. The user logs on using a username and password to access the database. The sign in page has password authentication. Once logged in the user Is taken to the home page which has a list of patients.
-Here the user can see the name of the patient and their date of birth and a dropdown to reveal the appointment date and the dental job required.
+A basic design to capture all the information that generally accompanies a dental laboratory prescription, it also allows the user to make modifications to contents of the database as necessary. Designed with simplicity for the user in mind, on opening the database the home page is also the sign in page. At the base of the sign in 
+is the option for a new user to register  or if the user wishes to, can click on Register on the navigation bar at the top of the page.
 
+## User Story
+The main objective of this milestone project is the CRUD oepration and this basically aligns with the function of the
+dental laboratory recording system whether it is in paper form or digital.
+
+As a user Type| I want to perform an action |So that I can achieve a goal|Type of Action|
+--------------|----------------------------|----------------------------|---------------|
+Dental Technician| View and Navigate | See outstanding patient Jobs| Read |
+Dental Technician| View and Navigate | See all Patients and Jobs| Read |
+Any User | View and Navigate | See outstanding patient Jobs | Read |
+Dental Technician | Add new patients | Maintain a record of new jobs | Create|
+Dental Technician | Add new patients | Maintain a record of new jobs | Create|
+Any User | Add new Jobs and Patient Type| Maintain accurate Job specifications and Patient types |Create|
+Dental Technician| Add new Jobs and Patient Type| Maintain accurate Job specifications and Patient types |Create|
 # Features
 
 ## Home

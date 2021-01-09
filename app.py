@@ -97,14 +97,14 @@ def edit_patient(patient_id):
 @app.route('/update_patient/<patient_id>', methods=['POST'])
 def update_patient(patient_id):
     patients = mongo.db.patients
-    patients.update({'_id': ObjectId(patient_id)},
-                    {'patient_name': request.form.get('patient_name'),
-                    'patient_dob': request.form.get('patient_dob'),
-                     'gender': request.form.get('gender'),
-                     'type_patient': request.form.get('type_patient'),
-                        'due_date': request.form.get('due_date'),
-                        'job_name': request.form.get('job_name'),
-                        'is_urgent': request.form.get('is_urgent')})
+    patients.update_one({'_id': ObjectId(patient_id)},
+                        {'patient_name': request.form.get('patient_name'),
+                        'patient_dob': request.form.get('patient_dob'),
+                         'gender': request.form.get('gender'),
+                         'type_patient': request.form.get('type_patient'),
+                         'due_date': request.form.get('due_date'),
+                         'job_name': request.form.get('job_name'),
+                         'is_urgent': request.form.get('is_urgent')})
     return redirect(url_for('get_patients'))
 
 
@@ -131,8 +131,8 @@ def edit_job(job_id):
 
 @app.route('/update_job/<job_id>', methods=['POST'])
 def update_job(job_id):
-    mongo.db.jobs.update({'_id': ObjectId(job_id)},
-                         {'job_name': request.form.get('job_name')})
+    mongo.db.jobs.update_one({'_id': ObjectId(job_id)},
+                             {'job_name': request.form.get('job_name')})
     return redirect(url_for('get_jobs'))
 
 
@@ -160,21 +160,21 @@ def add_job():
 # --------------------------------Read---------------------------------"""
 @app.route('/get_type')
 def get_type():
-    return render_template('type.html', type=mongo.db.type.find())
+    return render_template('type.html', type=list(mongo.db.type.find()))
 
 
 # ------------------------------Update----------------------------------"""
 @app.route('/edit_type/<type_id>')
 def edit_type(type_id):
     return render_template('edittype.html',
-                           type=mongo.db.type.find_one(
-                            {'_id': ObjectId(type_id)}))
+                           type=mongo.db.type.find_one({'_id': ObjectId(type_id)}))
 
 
-@app.route('/update_type/<type_id>', methods=['POST'])
+@app.route('/update_type/<type_id>')
 def update_type(type_id):
-    mongo.db.type.update({'_id': ObjectId(type_id)},
-                         {'type_patient': request.form.get('type_patient')})
+    mongo.db.type.update_one({'_id': ObjectId(type_id)},
+                             {'type_patient':
+                              request.form.get('type_patient')})
     return redirect(url_for('get_type'))
 
 
