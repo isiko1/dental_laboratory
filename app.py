@@ -82,6 +82,7 @@ def add_patient():
 def insert_patient():
     patients = mongo.db.patients
     patients.insert_one(request.form.to_dict())
+    flash("New Patient has been Added Successfully!")
     return redirect(url_for('get_patients'))
 
 # -----------------------------Update---------------------------------
@@ -105,6 +106,7 @@ def update_patient(patient_id):
                          'due_date': request.form.get('due_date'),
                          'job_name': request.form.get('job_name'),
                          'is_urgent': request.form.get('is_urgent')})
+    flash("Patient details have been Updated!")
     return redirect(url_for('get_patients'))
 
 
@@ -112,6 +114,7 @@ def update_patient(patient_id):
 @app.route('/delete_patient/<patient_id>')
 def delete_patient(patient_id):
     mongo.db.patients.remove({'_id': ObjectId(patient_id)})
+    flash("The Job has been completed. The Selected Patient has been Deleted")
     return redirect(url_for('get_patients'))
 
 
@@ -133,6 +136,7 @@ def edit_job(job_id):
 def update_job(job_id):
     mongo.db.jobs.update({'_id': ObjectId(job_id)},
                          {'job_name': request.form.get('job_name')})
+    flash("The selected Job has been Amended")
     return redirect(url_for('get_jobs'))
 
 
@@ -140,6 +144,7 @@ def update_job(job_id):
 @app.route('/delete_job/<job_id>')
 def delete_job(job_id):
     mongo.db.jobs.remove({'_id': ObjectId(job_id)})
+    flash("The selected Job has been Deleted")
     return redirect(url_for('get_jobs'))
 
 
@@ -148,6 +153,7 @@ def delete_job(job_id):
 def insert_job():
     job_doc = {'job_name': request.form.get('job_name')}
     mongo.db.jobs.insert_one(job_doc)
+    flash("New Job has been Added")
     return redirect(url_for('get_jobs'))
 
 
@@ -171,25 +177,28 @@ def edit_type(type_id):
                             {'_id': ObjectId(type_id)}))
 
 
-@app.route('/update_type/<type_id>', methods=["POST"])
+@app.route('/update_type/<type_id>', methods=['POST'])
 def update_type(type_id):
     mongo.db.type.update({'_id': ObjectId(type_id)},
-                         {'type_name': request.form.get('type_name')})
+                         {'type_patient': request.form.get('type_patient')})
+    flash("Patient Type has been amended")
     return redirect(url_for('get_type'))
 
 
 # -----------------------------Delete---------------------------------
 @app.route('/delete_type/<type_id>')
 def delete_type(type_id):
-    mongo.db.jobs.remove({'_id': ObjectId(type_id)})
+    mongo.db.type.remove({'_id': ObjectId(type_id)})
+    flash("Patient Type has been deleted")
     return redirect(url_for('get_type'))
 
 
 # -----------------------------Update---------------------------------
-@app.route('/insert_type', methods=["POST"])
+@app.route('/insert_type', methods=["GET", 'POST'])
 def insert_type():
-    type_doc = {'type_name': request.form.get('type_name')}
+    type_doc = {'type_patient': request.form.get('type_patient')}
     mongo.db.type.insert_one(type_doc)
+    flash("New Patient Type has been Added")
     return redirect(url_for('get_type'))
 
 
