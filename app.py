@@ -163,7 +163,7 @@ def get_type():
     return render_template('type.html', type=list(mongo.db.type.find()))
 
 
-# ------------------------------Update----------------------------------"""
+# ------------------------------Update----------------------------------
 @app.route('/edit_type/<type_id>')
 def edit_type(type_id):
     return render_template('edittype.html',
@@ -174,21 +174,21 @@ def edit_type(type_id):
 @app.route('/update_type/<type_id>', methods=["POST"])
 def update_type(type_id):
     mongo.db.type.update({'_id': ObjectId(type_id)},
-                         {'type_patient': request.form.get('type_patient')})
+                         {'type_name': request.form.get('type_name')})
     return redirect(url_for('get_type'))
 
 
-# ------------------------------Delete----------------------------------
+# -----------------------------Delete---------------------------------
 @app.route('/delete_type/<type_id>')
 def delete_type(type_id):
-    mongo.db.type.remove({'_id': ObjectId(type_id)})
+    mongo.db.jobs.remove({'_id': ObjectId(type_id)})
     return redirect(url_for('get_type'))
 
 
-# ------------------------------Create----------------------------------
+# -----------------------------Update---------------------------------
 @app.route('/insert_type', methods=["POST"])
 def insert_type():
-    type_doc = {'type_patient': request.form.get('type_patient')}
+    type_doc = {'type_name': request.form.get('type_name')}
     mongo.db.type.insert_one(type_doc)
     return redirect(url_for('get_type'))
 

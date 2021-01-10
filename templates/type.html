@@ -3,7 +3,7 @@
 <div class="container">
 	<h3 class="pat center-align">Patient Type</h3>
 	<ul class="collapsible" data-collapsible="accordian">
-		{% for t in type %}
+		{% for type in type %}
 		<li>
 			<div class="collapsible-header">
 				<a href="{{url_for('edit_type', type_id=type._id)}}"
