@@ -99,3 +99,4 @@ Some of the code used in this project was adapted and modified from: <br>
 The background image was obtained from free detal laboratory images at [bing](https://www.bing.com/images/search?q=dental+laboratory+free+images&qpvt=dental+laboratory+free+images&FORM=IGRE) <br>
 # Acknowledgements<br>
 The layout of the database was inspired by the Mini Project Tutorial. Thanks to my mentor for the valuable advice and suggestions. 
+The user story lay-out was adapted from my later "Hangout"
